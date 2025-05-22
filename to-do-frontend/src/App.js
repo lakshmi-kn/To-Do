@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './App.css'; // Make sure this is imported
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -25,23 +26,27 @@ function App() {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>To-Do List</h1>
-      <input
-        value={newTask}
-        onChange={e => setNewTask(e.target.value)}
-        placeholder="Enter a task"
-      />
-      <button onClick={addTask}>Add</button>
+    <div className="app-container">
+      <div className="todo-card">
+        <h1>To-Do List</h1>
+        <div className="task-input-container">
+          <input
+            value={newTask}
+            onChange={e => setNewTask(e.target.value)}
+            placeholder="Enter a task"
+          />
+          <button onClick={addTask} className="add-button">Add</button>
+        </div>
 
-      <ul>
-        {tasks.map(task => (
-          <li key={task.id}>
-            {task.title}
-            <button onClick={() => deleteTask(task.id)} style={{ marginLeft: 10 }}>Delete</button>
-          </li>
-        ))}
-      </ul>
+        <ol className="task-list">
+          {tasks.map(task => (
+            <li key={task.id} className="task-item">
+              <span className="task-title">{task.title}</span>
+              <button onClick={() => deleteTask(task.id)} className="delete-button">Delete</button>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 }
